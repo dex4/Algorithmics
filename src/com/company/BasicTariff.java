@@ -4,19 +4,19 @@ class BasicTariff extends Tariff {
     private static final Float costPerUnit = 0.22F;
     private static final Long basicRatePerMonth = 5L;
 
-    BasicTariff(Float consumption) {
-        super(consumption);
+    BasicTariff() {
         name = "Basic";
     }
 
     @Override
     Float calculateAnnualCost(Float yearlyConsumption) {
-        return basicRatePerMonth * 12 + yearlyConsumption * costPerUnit;
+        this.annualCost = basicRatePerMonth * 12 + yearlyConsumption * costPerUnit;
+        return annualCost;
     }
 
     @Override
     public String toString() {
-        return consumption + "\t\t" + name + "\t\t" + annualCost;
+        return name + "\t\t" + annualCost;
     }
 }
 

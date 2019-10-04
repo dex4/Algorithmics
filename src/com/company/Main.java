@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -11,36 +9,22 @@ public class Main {
     public static void main(String[] args) {
         initYearlyConsumptions();
         listPairsBasedOnBestCost();
-        listOrderedByCost();
     }
 
     private static void listPairsBasedOnBestCost() {
         System.out.println("List of tariffs paired by consumption and ordered based on annual cost:");
         System.out.println("Consumption\tTariff name\tAnnual cost");
         yearlyConsumptions.forEach(consumption -> {
-            BasicTariff basicTariff = new BasicTariff(consumption);
-            PackagedTariff packagedTariff = new PackagedTariff(consumption);
-            if (basicTariff.compareTo(packagedTariff) <= 0) {
-                System.out.println(basicTariff);
-                System.out.println(packagedTariff);
+            BasicTariff basicTariff = new BasicTariff();
+            PackagedTariff packagedTariff = new PackagedTariff();
+            if (basicTariff.comparison(packagedTariff, consumption) <= 0) {
+                System.out.println(consumption + "\t\t" + basicTariff);
+                System.out.println(consumption + "\t\t" + packagedTariff);
             } else {
-                System.out.println(packagedTariff);
-                System.out.println(basicTariff);
+                System.out.println(consumption + "\t\t" + packagedTariff);
+                System.out.println(consumption + "\t\t" + basicTariff);
             }
         });
-        System.out.println();
-    }
-
-    private static void listOrderedByCost() {
-        List<Tariff> tariffList = new ArrayList<>();
-        yearlyConsumptions.forEach(consumption -> {
-            tariffList.add(new BasicTariff(consumption));
-            tariffList.add(new PackagedTariff(consumption));
-        });
-        Collections.sort(tariffList);
-        System.out.println("List of tariffs ordered based on annual cost:");
-        System.out.println("Consumption\tTariff name\tAnnual cost");
-        tariffList.forEach(System.out::println);
         System.out.println();
     }
 
