@@ -1,10 +1,20 @@
 package com.company;
 
-abstract public class Tariff {
+abstract class Tariff implements Comparable<Tariff> {
     String name;
+    Float annualCost;
+    Float consumption;
 
-    public abstract Float getAnnualCost(Float yearlyConsumption);
+    Tariff(Float consumption) {
+        this.consumption = consumption;
+        annualCost = calculateAnnualCost(consumption);
+    }
 
-    public abstract int compareTo(Tariff tariff, Float yearlyCost);
+    abstract Float calculateAnnualCost(Float yearlyConsumption);
+
+    @Override
+    public int compareTo(Tariff tariff) {
+        return Float.compare(this.annualCost, tariff.annualCost);
+    }
 }
 
