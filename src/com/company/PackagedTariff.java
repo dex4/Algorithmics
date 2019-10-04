@@ -1,16 +1,16 @@
 package com.company;
 
 public class PackagedTariff extends Tariff {
-    private static final Long costPerUnit = 30L;
-    private static final Long baseAnnualCost = 800L;
+    private static final Float costPerUnit = 0.30F;
+    private static final Float baseAnnualCost = 800F;
     private static final Long consumptionThreshold = 4000L;
 
     PackagedTariff() {
-        name = "Packaged tariff";
+        name = "Packaged";
     }
 
     @Override
-    public Long calculateConsumption(Long yearlyConsumption) {
+    public Float getAnnualCost(Float yearlyConsumption) {
         if (yearlyConsumption <= consumptionThreshold) {
             return baseAnnualCost;
         } else {
@@ -19,8 +19,8 @@ public class PackagedTariff extends Tariff {
     }
 
     @Override
-    public int compareTo(Tariff tariff, long yearlyConsumption) {
-        return Long.compare(this.calculateConsumption(yearlyConsumption),
-                tariff.calculateConsumption(yearlyConsumption));
+    public int compareTo(Tariff tariff, Float yearlyConsumption) {
+        return Float.compare(this.getAnnualCost(yearlyConsumption),
+                tariff.getAnnualCost(yearlyConsumption));
     }
 }

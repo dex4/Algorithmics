@@ -1,10 +1,10 @@
 package com.company;
 
 abstract public class Tariff {
-    public String name;
-    public long annualCost;
+    String name;
 
-    public abstract Long calculateConsumption(Long yearlyConsumption);
-    public abstract int compareTo(Tariff tariff, long yearlyCost);
+    public abstract Float getAnnualCost(Float yearlyConsumption);
+
+    public abstract int compareTo(Tariff tariff, Float yearlyCost);
 }
 

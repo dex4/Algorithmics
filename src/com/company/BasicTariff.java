@@ -1,22 +1,22 @@
 package com.company;
 
 public class BasicTariff extends Tariff {
-    private static final Long costPerUnit = 22L;
+    private static final Float costPerUnit = 0.22F;
     private static final Long basicRatePerMonth = 5L;
 
     BasicTariff() {
-        name = "Basic electricity tariff";
+        this.name = "Basic";
     }
 
     @Override
-    public Long calculateConsumption(Long yearlyConsumption) {
+    public Float getAnnualCost(Float yearlyConsumption) {
         return basicRatePerMonth * 12 + yearlyConsumption * costPerUnit;
     }
 
     @Override
-    public int compareTo(Tariff tariff, long yearlyConsumption) {
-        return Long.compare(this.calculateConsumption(yearlyConsumption),
-                tariff.calculateConsumption(yearlyConsumption));
+    public int compareTo(Tariff tariff, Float yearlyConsumption) {
+        return Float.compare(this.getAnnualCost(yearlyConsumption),
+                tariff.getAnnualCost(yearlyConsumption));
     }
 }
 
